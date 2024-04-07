@@ -23,16 +23,30 @@ CREATE DATABASE IF NOT EXISTS ctms;
 USE ctms;
 
 -- Create table 'users' to store user information
-
-
+-- SATYA PRIYANKA PONDURU 
+CREATE TABLE users (
+	userid INT AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(100) NOT NULL,
+	email VARCHAR(100) NOT NULL UNIQUE,
+	age INT,
+	gender ENUM('Male', 'Female', 'Other')
+);
 -- Insert unique user information from customer_support_tickets into the 'users' table
-
+-- SATYA PRIYANKA PONDURU
+INSERT INTO users (name, email, age, gender)
+SELECT DISTINCT `Customer Name`, `Customer Email`, `Customer Age`, `Customer Gender` FROM customer_support_tickets;
 
 -- Create table 'products' to store product information
-
+-- SATYA PRIYANKA PONDURU
+CREATE TABLE products (
+	productid INT AUTO_INCREMENT PRIMARY KEY,
+	product VARCHAR(100) NOT NULL
+);
 
 -- Insert unique product information from customer_support_tickets into the 'products' table
-
+-- SATYA PRIYANKA PONDURU
+INSERT INTO products (product)
+SELECT DISTINCT `Product Purchased` FROM customer_support_tickets;
 
 -- Create table 'sales' to store sales transactions
 -- Vikranth Nallapuneni
