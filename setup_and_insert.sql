@@ -35,9 +35,24 @@ USE ctms;
 
 
 -- Create table 'sales' to store sales transactions
+-- Vikranth Nallapuneni
+CREATE TABLE sales (
+	saleid INT AUTO_INCREMENT PRIMARY KEY,
+	userid INT,
+	productid INT,
+	date_of_purchase DATE NOT NULL,
+	FOREIGN KEY (userid) REFERENCES users(userid),
+	FOREIGN KEY (productid) REFERENCES products(productid)
+);
 
 
 -- Insert sales information from customer_support_tickets into the 'sales' table
+-- Vikranth Nallapuneni
+INSERT INTO sales (userid, productid, date_of_purchase)
+SELECT DISTINCT userid, productid, `Date of Purchase` FROM customer_support_tickets csp
+JOIN users u ON csp.`Customer Name` = u.name AND csp.`Customer Email` = u.email AND csp.`Customer Age` = u.age AND csp.`Customer Gender` = u.gender
+JOIN products p ON csp.`Product Purchased` = p.product;
+ 
 
 
 -- Create table 'tickets' to store support tickets
