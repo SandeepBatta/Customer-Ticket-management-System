@@ -13,9 +13,8 @@ def insert_ticket(data):
             INSERT INTO tickets (userid, saleid, type, subject, description, create_time, status, priority, channel)
             VALUES (:userid, :saleid, :type, :subject, :description, :create_time, :status, :priority, :channel)
         """)
-        print(data)
         conn.execute(query, data)
-        conn.execute("COMMIT")
+        conn.commit()
     except Exception as e:
         st.error(f"An error occurred: {e}")
         conn.execute("ROLLBACK")
