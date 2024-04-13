@@ -1,6 +1,6 @@
 import streamlit as st
 from datetime import datetime
-from database import insert_ticket
+from database import insert_ticket, delete_ticket
 
 def show_ticket_form():
     # Initialize the Streamlit app
@@ -43,3 +43,25 @@ def show_ticket_form():
             }
             insert_ticket(ticket_data)  # Simulate a database operation
             st.success("Ticket submitted successfully!")
+
+
+def show_delete_ticket_form():
+    # Initialize the Streamlit app
+    st.title('Delete Ticket Form')
+
+    # Using form for input
+    with st.form("delete_ticket_form"):
+        st.write("Please enter the ID of the ticket you want to delete.")
+
+        # Fields to input data
+        ticket_id = st.number_input('Ticket ID', min_value=1, step=1)
+
+        # Submit button for the form
+        submit_button = st.form_submit_button("Delete Ticket")
+
+        # Processing form data
+        if submit_button:
+            if delete_ticket(ticket_id):
+                st.success("Ticket deleted successfully!")
+            else:
+                st.error("Failed to delete ticket.")
