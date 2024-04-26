@@ -5,13 +5,10 @@ import json
 
 
 def get_connection():
-    with open("credentials.json") as fh:
-        credentials = json.load(fh)
-
-    user = credentials["user"]
-    password = credentials["password"]
-    hostname = credentials["hostname"]
-    database = credentials["database"]
+    user = st.secrets["user"]
+    password = st.secrets["password"]
+    hostname = st.secrets["hostname"]
+    database = st.secrets["database"]
 
     # Create a connection to the MySQL database
     try:
