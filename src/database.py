@@ -38,6 +38,16 @@ def get_users():
         connection.close()
         return users
 
+def insert_user(name,email,age,gender):
+    connection = get_connection()
+    if connection.is_connected():
+        cursor = connection.cursor()
+        query = f"""INSERT INTO users ( name, email, age, gender) VALUES ('{name}', '{email}', '{age}', '{gender}')"""
+        cursor.execute(query)
+        connection.commit()
+        cursor.close()
+        connection.close()
+        st.toast("user created successfully.")
 
 def get_total_pages(filters, page_size):
     connection = get_connection()
