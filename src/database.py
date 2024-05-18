@@ -20,7 +20,8 @@ def get_connection():
         )
         return connection
     except Error as e:
-        st.error("Error connecting to database", e)
+        st.info("MySQL instance is stopped", icon="ℹ️")
+        # st.error("Error connecting to database", e)
         st.stop()
 
 
@@ -35,7 +36,8 @@ def get_users():
         connection.close()
         return users
 
-def insert_user(name,email,age,gender):
+
+def insert_user(name, email, age, gender):
     connection = get_connection()
     if connection.is_connected():
         cursor = connection.cursor()
@@ -45,6 +47,7 @@ def insert_user(name,email,age,gender):
         cursor.close()
         connection.close()
         st.toast("user created successfully.")
+
 
 def get_total_pages(filters, page_size):
     connection = get_connection()
